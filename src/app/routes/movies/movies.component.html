@@ -1,4 +1,4 @@
-<div>
+<div class="centered-container full-padding">
     <div class="favorite-toggle">
         <button (click)="getFavoriteMovies()">Favoritos</button>
         <button (click)="getMovies()">Todos</button>
@@ -9,6 +9,7 @@
             <p>Título: {{movie.name}}</p>
             <p>Favorito: {{movie.favorite?"True":"False"}}</p>
             <p>Ano de Lançamento: {{movie.launchYear}}</p>
+            <p>Nota do IMDB: {{movie.imdbnote}}</p>
             <button (click)="setMovieFavorite(movie.movieID)">Favoritar</button>
         </div>
     </div>

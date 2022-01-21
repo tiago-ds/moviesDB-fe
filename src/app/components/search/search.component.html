@@ -1,4 +1,8 @@
-<div>
-    <input type="text" placeholder="Escreva um filme" [(ngModel)]="searchString">
-    <button (click)="searchMovies(searchString)">Buscar</button>
-</div>
+
+<mat-form-field appearance="outline" class="full-width search-component">
+    <mat-label>Pesquisar um filme...</mat-label>
+    <input matInput [(ngModel)]="searchString">
+    <button mat-icon-button aria-label="Pesquisar" (click)="searchMovies(searchString)" matSuffix>
+        <mat-icon color="primary">search</mat-icon>
+      </button>
+</mat-form-field>

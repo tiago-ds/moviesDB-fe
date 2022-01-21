@@ -12,7 +12,7 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   public getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.apiServerURL}/movie/all`);
+    return this.http.get<Movie[]>(`${this.apiServerURL}/movie/all/sorted`);
   }
 
   public searchMovies(name: string): Observable<Movie[]> {

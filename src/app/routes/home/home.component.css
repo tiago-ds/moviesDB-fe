@@ -1,0 +1,9 @@
+.viewport-height-container {
+    height: 80vh;
+}
+
+.vertical-centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

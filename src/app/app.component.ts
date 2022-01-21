@@ -1,8 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../models/Movie';
-import { MovieService } from './services/movie.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +6,6 @@ import { MovieService } from './services/movie.service';
 })
 export class AppComponent {
 
-  title = 'movieDB-fe';
-  
+  title = 'movieDB';
 
 }
