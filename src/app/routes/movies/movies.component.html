@@ -1,0 +1,15 @@
+<div>
+    <div class="favorite-toggle">
+        <button (click)="getFavoriteMovies()">Favoritos</button>
+        <button (click)="getMovies()">Todos</button>
+    </div>
+    <div *ngFor="let movie of movies" class="movie-container">
+        -----------------------
+        <div>
+            <p>Título: {{movie.name}}</p>
+            <p>Favorito: {{movie.favorite?"True":"False"}}</p>
+            <p>Ano de Lançamento: {{movie.launchYear}}</p>
+            <button (click)="setMovieFavorite(movie.movieID)">Favoritar</button>
+        </div>
+    </div>
+</div>
