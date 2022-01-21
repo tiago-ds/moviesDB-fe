@@ -1,3 +1,10 @@
+<mat-progress-bar mode="indeterminate" *ngIf="isSearching"></mat-progress-bar>
 <div class="centered-container full-padding viewport-height-container vertical-centered">
-    <app-search class="full-width"></app-search>
+    <div>
+        <app-search (searchState)="updateSearchState($event)" class="full-width"></app-search>
+        <button mat-button color="primary" (click)="goToFavorites()">
+          Visualizar favoritos
+          <mat-icon>arrow_right</mat-icon>
+        </button>
+    </div>
 </div>

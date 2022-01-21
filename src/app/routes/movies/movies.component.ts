@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../../models/Movie';
 import { MovieService } from '../../services/movie.service';
 
@@ -11,14 +12,18 @@ import { MovieService } from '../../services/movie.service';
 export class MoviesComponent implements OnInit {
 
   public movies: Movie[] | undefined;
+  public currentFilter: MovieFilterSelection = "all";
 
-  constructor(private movieService: MovieService) { }
-
-  ngOnInit(): void {
-    this.getMovies();
+  constructor(private movieService: MovieService, private router: Router, private activatedRoute: ActivatedRoute) {
+    if (this.router?.getCurrentNavigation()?.extras?.state?.['currentFilter']) {
+      this.currentFilter = this.router?.getCurrentNavigation()?.extras?.state?.['currentFilter'];
+    }
   }
 
-  
+  ngOnInit(): void {
+    this.updateCurrentList(this.currentFilter);
+  }
+
   public getMovies(): void {
     this.movieService.getMovies().subscribe(
       (response: Movie[]) => {
@@ -42,20 +47,24 @@ export class MoviesComponent implements OnInit {
     );
   }
 
-  public setMovieFavorite(movieID: number): void {
-    this.movieService.toggleMovieFavorite(movieID).subscribe(
-      (response: Movie) => {
-        let updatedMovie = this.movies?.find(movie => movie.movieID == movieID)!;
-        updatedMovie.favorite = !updatedMovie?.favorite;
-        if(!updatedMovie.favorite) {
-          this.getFavoriteMovies();
-        }
-        console.log(response);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+  public updateCurrentList(currentFilter : MovieFilterSelection): void {
+    
+    this.currentFilter = currentFilter;
+    if(currentFilter == "all") {
+      this.getMovies();
+    }else if(currentFilter == "favorites") {
+      this.getFavoriteMovies();
+    }
   }
-
+  
+  public onFavoriteUpdate() {
+    if(this.currentFilter == "all") {
+      return;
+    }
+    this.updateCurrentList(this.currentFilter);
+  }
+  
 }
+
+
+export type MovieFilterSelection = "all" | "favorites";

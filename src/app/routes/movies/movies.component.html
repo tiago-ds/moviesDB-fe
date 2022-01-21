@@ -1,16 +1,15 @@
 <div class="centered-container full-padding">
-    <div class="favorite-toggle">
-        <button (click)="getFavoriteMovies()">Favoritos</button>
-        <button (click)="getMovies()">Todos</button>
-    </div>
+    <mat-chip-list aria-label="Filtrar lista">
+        <mat-chip [color]="currentFilter == 'all' ? 'primary' : ''" [selected]="currentFilter == 'all'"
+        (click)="updateCurrentList('all')">
+            Todos
+        </mat-chip>
+         <mat-chip [color]="currentFilter == 'favorites' ? 'primary' : ''" [selected]="currentFilter == 'favorites'"
+         (click)="updateCurrentList('favorites')">
+            Favoritos
+        </mat-chip>
+    </mat-chip-list>
     <div *ngFor="let movie of movies" class="movie-container">
-        -----------------------
-        <div>
-            <p>Título: {{movie.name}}</p>
-            <p>Favorito: {{movie.favorite?"True":"False"}}</p>
-            <p>Ano de Lançamento: {{movie.launchYear}}</p>
-            <p>Nota do IMDB: {{movie.imdbnote}}</p>
-            <button (click)="setMovieFavorite(movie.movieID)">Favoritar</button>
-        </div>
+        <app-card [movie]="movie" (favoriteUpdated)="onFavoriteUpdate()"  *ngIf="movie.launchYear!=0"></app-card>
     </div>
 </div>

@@ -1,1 +1,19 @@
-<p>card works!</p>
+<mat-card class="card-component">
+    <mat-card-title-group>
+        <mat-card-title>{{movie.name}}</mat-card-title>
+        <mat-card-subtitle>{{movie.launchYear}} • Nota do IMDB: {{movie.imdbnote}} </mat-card-subtitle>
+        <img src={{movie.image}} class="poster-img">
+    </mat-card-title-group>
+
+    <mat-card-actions>
+      <button
+        mat-icon-button
+        color="warn"
+        [attr.aria-label]= "movie.favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
+        (click)="setMovieFavorite()"
+      >
+        <mat-icon>{{movie.favorite ? "favorite" : "favorite_border"}}</mat-icon>
+      </button>
+    </mat-card-actions>
+    
+  </mat-card>

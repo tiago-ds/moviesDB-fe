@@ -20,6 +20,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CardComponent } from './components/card/card.component';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { CardComponent } from './components/card/card.component';
     MatDividerModule,
     MatListModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
