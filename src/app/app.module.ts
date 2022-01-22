@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CardComponent } from './components/card/card.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -48,7 +49,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatListModule,
     MatCardModule,
     MatProgressBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

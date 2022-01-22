@@ -5,4 +5,10 @@
 
 .poster-img {
     height: 112px;
+    transition-property: height;
+    transition-duration: 0.5s;
+}
+
+.poster-img:hover {
+    height: 190px;
 }

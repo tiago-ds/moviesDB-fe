@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Movie } from 'src/models/Movie';
 import { MovieService } from 'src/app/services/movie.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,7 +16,7 @@ export class CardComponent implements OnInit {
 
   @Output() favoriteUpdated: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private matSnackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -25,10 +26,11 @@ export class CardComponent implements OnInit {
     this.movieService.toggleMovieFavorite(this.movie.movieID).subscribe(
       (response: Movie) => {
         this.movie.favorite = !this.movie.favorite;
+        this.matSnackBar.open("Sucesso.", "", { duration : 500 } );
         if(!this.movie.favorite) {
           this.favoriteUpdated.emit(this.movie.favorite);
         }
-        console.log(response);
+
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

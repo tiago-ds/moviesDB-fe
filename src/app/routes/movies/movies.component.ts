@@ -38,7 +38,6 @@ export class MoviesComponent implements OnInit {
   public getFavoriteMovies(): void {
     this.movieService.getFavoriteMovies().subscribe(
       (response: Movie[]) => {
-        console.log(response);
         this.movies = response;
       },
       (error: HttpErrorResponse) => {

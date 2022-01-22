@@ -24,7 +24,6 @@ export class MovieService {
   }
 
   public toggleMovieFavorite(movieID: number): Observable<Movie> {
-    console.log(`${this.apiServerURL}/movie/update/toggle-favorite/${movieID}`);
     return this.http.put<Movie>(`${this.apiServerURL}/movie/update/toggle-favorite/${movieID}`, {});
   }
 }
