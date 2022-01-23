@@ -23,7 +23,7 @@ export class CardComponent implements OnInit {
 
   
   public setMovieFavorite(): void {
-    this.movieService.toggleMovieFavorite(this.movie.movieID).subscribe(
+    this.movieService.toggleMovieFavorite(this.movie.movieId).subscribe(
       (response: Movie) => {
         this.movie.favorite = !this.movie.favorite;
         this.matSnackBar.open("Sucesso.", "", { duration : 500 } );
@@ -33,7 +33,7 @@ export class CardComponent implements OnInit {
 
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(`(${error.status}) ${error.error}`);
       }
     );
   }

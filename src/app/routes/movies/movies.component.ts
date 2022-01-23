@@ -30,7 +30,7 @@ export class MoviesComponent implements OnInit {
         this.movies = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(`(${error.status}) ${error.error}`);
       }
     );
   }
@@ -41,7 +41,7 @@ export class MoviesComponent implements OnInit {
         this.movies = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(`(${error.status}) ${error.error}`);
       }
     );
   }

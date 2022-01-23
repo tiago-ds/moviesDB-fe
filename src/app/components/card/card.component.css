@@ -12,3 +12,7 @@
 .poster-img:hover {
     height: 190px;
 }
+
+mat-card {
+    background-color: #F3F3F3;
+}

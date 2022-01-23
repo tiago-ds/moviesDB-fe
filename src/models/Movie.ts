@@ -1,5 +1,5 @@
 export interface Movie {
-    movieID : number;
+    movieId : number;
     imbdRate : number,
     image: string,
     launchYear: number,

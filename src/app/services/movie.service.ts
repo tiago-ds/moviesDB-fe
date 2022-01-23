@@ -12,7 +12,7 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   public getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.apiServerURL}/movie/all/sorted`);
+    return this.http.get<Movie[]>(`${this.apiServerURL}/movie/?sorted=true`);
   }
 
   public searchMovies(name: string): Observable<Movie[]> {
@@ -23,7 +23,8 @@ export class MovieService {
     return this.http.get<Movie[]>(`${this.apiServerURL}/movie/favorites`);
   }
 
-  public toggleMovieFavorite(movieID: number): Observable<Movie> {
-    return this.http.put<Movie>(`${this.apiServerURL}/movie/update/toggle-favorite/${movieID}`, {});
+  public toggleMovieFavorite(movieId: number): Observable<Movie> {
+    const res = this.http.put<Movie>(`${this.apiServerURL}/movie/toggle-favorite/${movieId}`, {});
+    return res;
   }
 }

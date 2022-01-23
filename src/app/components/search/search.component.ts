@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.searchState.emit(false);
-        alert(error.message);
+        alert(`(${error.status}) ${error.error}`);
       }
     )
   }
