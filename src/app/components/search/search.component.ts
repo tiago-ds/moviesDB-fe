@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
       (response: Movie[]) => {
         this.searchState.emit(false);
         if(response.length == 0) {
-          alert("Não foi possível encontrar filmes com esse nome!");
+          alert("Não foi possível encontrar novos filmes com esse nome!");
         }
         this.router.navigate(['movies']);
       },

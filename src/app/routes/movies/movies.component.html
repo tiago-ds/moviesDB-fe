@@ -1,15 +1,36 @@
+<mat-progress-bar mode="query" *ngIf="isRequesting"></mat-progress-bar>
 <div class="centered-container full-padding">
     <mat-chip-list aria-label="Filtrar lista">
         <mat-chip [color]="currentFilter == 'all' ? 'primary' : ''" [selected]="currentFilter == 'all'"
         (click)="updateCurrentList('all')">
             Todos
         </mat-chip>
-         <mat-chip [color]="currentFilter == 'favorites' ? 'primary' : ''" [selected]="currentFilter == 'favorites'"
+        <mat-chip [color]="currentFilter == 'favorites' ? 'primary' : ''" [selected]="currentFilter == 'favorites'"
          (click)="updateCurrentList('favorites')">
             Favoritos
         </mat-chip>
+        <mat-chip [color]="currentFilter == 'before00s' ? 'primary' : ''" [selected]="currentFilter == 'before00s'"
+         (click)="updateCurrentList('before00s')">
+            Antes dos 00s
+        </mat-chip>
+        <mat-chip [color]="currentFilter == '00s' ? 'primary' : ''" [selected]="currentFilter == '00s'"
+        (click)="updateCurrentList('00s')">
+           00s
+       </mat-chip>
+        <mat-chip [color]="currentFilter == '10s' ? 'primary' : ''" [selected]="currentFilter == '10s'"
+        (click)="updateCurrentList('10s')">
+           10s
+       </mat-chip>
+       <mat-chip [color]="currentFilter == '20s' ? 'primary' : ''" [selected]="currentFilter == '20s'"
+        (click)="updateCurrentList('20s')">
+           20s
+       </mat-chip>
+       <mat-chip [color]="currentFilter == 'topImdb' ? 'primary' : ''" [selected]="currentFilter == 'topImdb'"
+        (click)="updateCurrentList('topImdb')">
+           Melhores do IMDB
+       </mat-chip>
     </mat-chip-list>
-    <div *ngFor="let movie of movies" class="movie-container">
+    <div *ngFor="let movie of currentShownMovies" class="movie-container">
         <app-card [movie]="movie" (favoriteUpdated)="onFavoriteUpdate()"  *ngIf="movie.launchYear!=0"></app-card>
     </div>
 </div>
