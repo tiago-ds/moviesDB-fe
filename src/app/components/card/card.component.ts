@@ -10,6 +10,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
+
+  isExpanded: boolean = false;
   
   @Input()
   movie!: Movie;

@@ -47,22 +47,18 @@ export class MoviesComponent implements OnInit {
   }
 
   public updateCurrentList(currentFilter : MovieFilterSelection): void {
-    this.currentFilter = currentFilter;
-    if(currentFilter == "all") {
-      this.currentShownMovies = this.movies;
-    }else if(currentFilter == "favorites") {
-      this.currentShownMovies = this.movies?.filter(movie => movie.favorite);
-    }else if(currentFilter == "before00s") {
-      this.currentShownMovies = this.movies?.filter(movie => movie.launchYear < 2000);
-    }else if(currentFilter == "00s") {
-      this.currentShownMovies = this.movies?.filter(movie => movie.launchYear >= 2000 && movie.launchYear < 2010);
-    }else if(currentFilter == "10s") {
-      this.currentShownMovies = this.movies?.filter(movie => movie.launchYear >= 2010 && movie.launchYear < 2020);
-    }else if(currentFilter == "20s") {
-      this.currentShownMovies = this.movies?.filter(movie => movie.launchYear >= 2020 && movie.launchYear < 2030);
-    }else if(currentFilter == "topImdb") {
-      this.currentShownMovies = this.movies?.filter(movie => movie.imbdRate >= 7.5);
+    const filters: Record<MovieFilterSelection, (movie: Movie) => boolean> = {
+      "all": (() => true),
+      "favorites": (movie => movie.favorite),
+      "before00s": (movie => movie.launchYear < 2000),
+      "00s": (movie => movie.launchYear >= 2000 && movie.launchYear < 2010),
+      "10s": (movie => movie.launchYear >= 2010 && movie.launchYear < 2020),
+      "20s": (movie => movie.launchYear >= 2020 && movie.launchYear < 2030),
+      "topImdb" : (movie => movie.imbdRate >= 7.5),
     }
+    
+    this.currentFilter = currentFilter;
+    this.currentShownMovies = this.movies?.filter(filters[currentFilter]);
   }
   
   public onFavoriteUpdate() {

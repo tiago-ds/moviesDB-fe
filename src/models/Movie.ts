@@ -5,4 +5,5 @@ export interface Movie {
     launchYear: number,
     name: string,
     favorite: boolean,
+    description: string,
 }

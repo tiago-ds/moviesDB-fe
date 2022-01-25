@@ -1,19 +1,39 @@
 <mat-card class="card-component">
-    <mat-card-title-group>
-        <mat-card-title>{{movie.name}}</mat-card-title>
-        <mat-card-subtitle>{{movie.launchYear}} • Nota do IMDB: {{movie.imbdRate}} </mat-card-subtitle>
-        <img src={{movie.image}} class="poster-img">
-    </mat-card-title-group>
-
-    <mat-card-actions>
-      <button
-        mat-icon-button
-        color="warn"
-        [attr.aria-label]= "movie.favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
-        (click)="setMovieFavorite()"
-      >
-        <mat-icon>{{movie.favorite ? "favorite" : "favorite_border"}}</mat-icon>
-      </button>
-    </mat-card-actions>
-    
-  </mat-card>
+  <mat-card-title-group>
+    <mat-card-title>{{ movie.name }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ movie.launchYear }} • Nota do IMDB: {{ movie.imbdRate }}
+    </mat-card-subtitle>
+    <img
+      src="{{ movie.image }}"
+      [ngClass]="isExpanded ? 'poster-img-expanded poster-img' : 'poster-img'"
+    />
+  </mat-card-title-group>
+  <mat-card-content *ngIf="isExpanded">
+    <p>
+      {{ movie.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-icon-button
+      color="warn"
+      [attr.aria-label]="
+        movie.favorite ? 'Remover dos favoritos' : 'Adicionar aos favoritos'
+      "
+      (click)="setMovieFavorite()"
+    >
+      <mat-icon>{{ movie.favorite ? "favorite" : "favorite_border" }}</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="primary"
+      [attr.aria-label]="
+        isExpanded ? 'Mostrar menos detalhes' : 'Mostrar mais detalhes'
+      "
+      (click)="isExpanded = !isExpanded"
+    >
+      <mat-icon>{{ isExpanded ? "expand_less" : "expand_more" }}</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

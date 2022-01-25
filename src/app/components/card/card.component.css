@@ -9,7 +9,7 @@
     transition-duration: 0.5s;
 }
 
-.poster-img:hover {
+.poster-img-expanded {
     height: 190px;
 }
 
