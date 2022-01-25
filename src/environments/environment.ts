@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseURL: 'https://moviesdb-be.herokuapp.com'
+  apiBaseURL: 'http://localhost:8080'
 };
 
 /*
