@@ -30,7 +30,13 @@
            Melhores do IMDB
        </mat-chip>
     </mat-chip-list>
-    <div *ngFor="let movie of currentShownMovies" class="movie-container">
-        <app-card [movie]="movie" (favoriteUpdated)="onFavoriteUpdate()"  *ngIf="movie.launchYear!=0"></app-card>
+    <div 
+    infinite-scroll
+    [infiniteScrollDistance]="5"
+    [infiniteScrollThrottle]="1000"
+    (scrolled)="onScroll()">
+        <div *ngFor="let movie of currentShownMovies" class="movie-container">
+            <app-card [movie]="movie" (favoriteUpdated)="onFavoriteUpdate()"></app-card>
+        </div>
     </div>
 </div>

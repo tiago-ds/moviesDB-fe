@@ -22,7 +22,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CardComponent } from './components/card/card.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -50,7 +50,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     MatProgressBarModule,
     MatChipsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

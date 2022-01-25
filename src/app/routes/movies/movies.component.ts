@@ -15,6 +15,8 @@ export class MoviesComponent implements OnInit {
   public currentShownMovies: Movie[] | undefined;
   public currentFilter: MovieFilterSelection = "all";
   
+  offset: number = 0;
+  offsetConst: number = 10;
   isRequesting: boolean = false;
 
   constructor(private movieService: MovieService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -31,9 +33,10 @@ export class MoviesComponent implements OnInit {
   public getMovies(): Promise<void> {
     this.isRequesting = true;
     return new Promise((resolve, reject) => {
-      this.movieService.getMovies().subscribe(
+      this.movieService.getMoviesByPage(this.offset).subscribe(
         (response: Movie[]) => {
           this.movies = response;
+          this.offset += this.offsetConst;
           this.isRequesting = false;
           resolve();
         },
@@ -56,9 +59,9 @@ export class MoviesComponent implements OnInit {
       "20s": (movie => movie.launchYear >= 2020 && movie.launchYear < 2030),
       "topImdb" : (movie => movie.imbdRate >= 7.5),
     }
-    
     this.currentFilter = currentFilter;
     this.currentShownMovies = this.movies?.filter(filters[currentFilter]);
+
   }
   
   public onFavoriteUpdate() {
@@ -66,6 +69,22 @@ export class MoviesComponent implements OnInit {
       return;
     }
     this.updateCurrentList(this.currentFilter);
+  }
+
+  public onScroll() {
+    this.isRequesting = true;
+    this.movieService.getMoviesByPage(this.offset).subscribe(
+      (response: Movie[]) => {
+        this.movies?.push(...response);
+        this.offset += this.offsetConst;
+        this.isRequesting = false;
+        this.updateCurrentList(this.currentFilter);
+      },
+      (error: HttpErrorResponse) => {
+        this.isRequesting = false;
+        alert(`(${error.status}) ${error.error}`);
+      }
+    );
   }
   
 }

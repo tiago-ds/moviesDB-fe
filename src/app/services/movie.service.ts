@@ -11,10 +11,6 @@ export class MovieService {
   private apiServerURL = environment.apiBaseURL;
   constructor(private http: HttpClient) { }
 
-  public getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.apiServerURL}/movie/?sorted=true`);
-  }
-
   public searchMovies(name: string): Observable<Movie[]> {
     return this.http.get<Movie[]>(`${this.apiServerURL}/movie/search/${name}`);
   }
@@ -26,5 +22,9 @@ export class MovieService {
   public toggleMovieFavorite(movieId: number): Observable<Movie> {
     const res = this.http.put<Movie>(`${this.apiServerURL}/movie/toggle-favorite/${movieId}`, {});
     return res;
+  }
+
+  public getMoviesByPage(offset: number): Observable<Movie[]> {
+    return this.http.get<Movie[]>(`${this.apiServerURL}/movie/batch/${offset}`);
   }
 }
