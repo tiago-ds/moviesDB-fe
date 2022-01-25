@@ -21,6 +21,10 @@ export class SearchComponent implements OnInit {
   }
 
   public searchMovies(name: string): void {
+    if(name.trim().length == 0) {
+      alert("Busca vazia.");
+      return;
+    }
     this.searchState.emit(true);
     this.movieService.searchMovies(name).subscribe(
       (response: Movie[]) => {
