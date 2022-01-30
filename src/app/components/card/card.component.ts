@@ -32,9 +32,11 @@ export class CardComponent implements OnInit {
         if(!this.movie.favorite) {
           this.favoriteUpdated.emit(this.movie.favorite);
         }
-
       },
       (error: HttpErrorResponse) => {
+        if(error instanceof Error) {
+          alert("Request Timeout");
+        }
         alert(`(${error.status}) ${error.error}`);
       }
     );

@@ -36,7 +36,16 @@ export class SearchComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.searchState.emit(false);
-        alert(`(${error.status}) ${error.error}`);
+        if(error instanceof Error) {
+          alert("Request Timeout");
+        }
+        // Custom exception, Angular managed to reach DB
+        else if(error.error.timestamp != undefined){
+          alert(`${error.error.httpStatus}: ${error.error.message}`);
+        }
+        else {
+          alert("Não foi possível conectar ao BD");
+        }
       }
     )
   }

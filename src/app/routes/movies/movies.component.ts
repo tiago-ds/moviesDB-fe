@@ -82,6 +82,9 @@ export class MoviesComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         this.isRequesting = false;
+        if(error instanceof Error) {
+          alert("Request Timeout");
+        }
         alert(`(${error.status}) ${error.error}`);
       }
     );
