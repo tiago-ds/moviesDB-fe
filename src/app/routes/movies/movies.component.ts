@@ -14,9 +14,10 @@ export class MoviesComponent implements OnInit {
   public movies: Movie[] | undefined;
   public currentShownMovies: Movie[] | undefined;
   public currentFilter: MovieFilterSelection = "all";
-  
+
   offset: number = 0;
   offsetConst: number = 10;
+  filterLimit: number = 50;
   isRequesting: boolean = false;
 
   constructor(private movieService: MovieService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -61,9 +62,17 @@ export class MoviesComponent implements OnInit {
     }
     this.currentFilter = currentFilter;
     this.currentShownMovies = this.movies?.filter(filters[currentFilter]);
-
+    var limit = 0;
+    while(this.currentShownMovies !== undefined &&
+      this.currentShownMovies?.length <= this.offsetConst &&
+        limit < this.filterLimit) {
+          /* The limit makes that the code doesn't run forever if we don't have
+          /  enough movies with that filter in the DB.
+          */
+      this.getMovies();
+    }
   }
-  
+
   public onFavoriteUpdate() {
     if(this.currentFilter != "favorites") {
       return;
@@ -89,7 +98,7 @@ export class MoviesComponent implements OnInit {
       }
     );
   }
-  
+
 }
 
 
